@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9f2">
+  <meta name="description" content="Ужинчик для Настик: подбирай вкусный ужин из того, что есть дома, крути рулетку рецептов и собирай список покупок.">
+  <meta property="og:title" content="Ужинчик ♡ — для Настик">
+  <meta property="og:description" content="Не знаешь, что приготовить? Ужинчик поможет решить.">
+  <title>Ужинчик ♡ — для Настик</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="recipes.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="#top" aria-label="Ужинчик, наверх">
+        <span class="brand-mark">✳</span>
+        <span>ужинчик<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Разделы сайта">
+        <a href="#pantry">Из продуктов</a>
+        <a href="#roulette">Рулетка</a>
+        <a href="#catalog">Рецепты</a>
+      </nav>
+      <a class="header-saved" href="#shopping" aria-label="Перейти к списку покупок">🛍️ <span class="header-saved-label">Покупки</span> <span id="bag-count" class="count-bubble">0</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="heart-icon">♥</span> С любовью, специально для Настик</div>
+        <h1 id="hero-title">Что у нас<br><span class="text-accent">на ужин</span> сегодня<span class="question-mark">?</span></h1>
+        <p class="hero-description">Больше не нужно часами думать, что приготовить. Напиши, что есть дома, — и найдём что-нибудь вкусненькое. Или доверь выбор случаю.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#pantry">Найти мне ужин <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-soft" href="#roulette">🎲 Удиви меня</a>
+        </div>
+        <div class="hero-mini"><span class="avatar-stack">🍅 🥑 🍋</span><span><strong id="recipe-count">57</strong> вкусных идей — от «лень готовить» до «я шеф»</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Иллюстрация аппетитной пасты">
+        <div class="visual-glow"></div>
+        <div class="big-circle circle-back"></div>
+        <div class="food-doodle doodle-top" aria-hidden="true">✻</div>
+        <div class="food-doodle doodle-bottom" aria-hidden="true">✳</div>
+        <div class="hero-plate"><span class="hero-plate-inner">🍝</span></div>
+        <div class="float-label label-one"><span>✨</span><span>Вкусно будет,<br><strong>обещаю!</strong></span></div>
+        <div class="float-label label-two"><span>♡</span> сделано для тебя</div>
+      </div>
+    </section>
+
+    <section class="container main-feature" id="pantry" aria-labelledby="pantry-title">
+      <div class="feature-head">
+        <div><div class="section-kicker"><span class="little-diamond">✦</span> МАГИЯ ХОЛОДИЛЬНИКА</div><h2 id="pantry-title">Что у тебя <em>есть дома?</em></h2><p>Перечисли продукты через запятую. Я покажу, что можно приготовить и что стоит докупить.</p></div>
+        <span class="feature-sticker" aria-hidden="true">👩‍🍳<small>ням!</small></span>
+      </div>
+      <div class="pantry-form">
+        <label for="pantry-input" class="input-label">МОИ ПРОДУКТЫ</label>
+        <textarea id="pantry-input" rows="3" placeholder="Например: курица, картошка, яйца, сыр, помидоры..."></textarea>
+        <div class="quick-line"><span>Быстро добавить:</span><div id="quick-ingredients" class="quick-ingredients"></div></div>
+        <div class="pantry-bottom"><span class="muted-note">💡 Соль, перец, вода и растительное масло считаются базовыми.</span><button class="btn btn-primary" id="find-btn" type="button">✨ Подобрать блюда <span aria-hidden="true">→</span></button></div>
+      </div>
+      <div id="results" class="match-results" hidden aria-live="polite"></div>
+    </section>
+
+    <section class="container roulette-section" id="roulette" aria-labelledby="roulette-title">
+      <div class="roulette-left">
+        <div class="section-kicker">🎲 КОГДА НЕ ЗНАЕШЬ, ЧЕГО ХОЧЕТСЯ</div>
+        <h2 id="roulette-title">Пусть решит <em>случай!</em></h2>
+        <p>Никаких мучительных выборов. Выбирай уровень сложности, жми на кнопку — и судьба назначит ужин.</p>
+        <div class="difficulty-choices" role="group" aria-label="Сложность случайного блюда">
+          <button type="button" class="difficulty-choice active" data-random-difficulty="all" aria-pressed="true">Всё подряд</button>
+          <button type="button" class="difficulty-choice" data-random-difficulty="easy" aria-pressed="false">Легко</button>
+          <button type="button" class="difficulty-choice" data-random-difficulty="medium" aria-pressed="false">Средне</button>
+          <button type="button" class="difficulty-choice" data-random-difficulty="hard" aria-pressed="false">Сложно</button>
+        </div>
+        <button id="spin-btn" type="button" class="btn btn-dark">Крутить рулетку <span aria-hidden="true">↻</span></button>
+      </div>
+      <div class="roulette-output" id="random-output" aria-live="polite">
+        <div class="random-orbit" aria-hidden="true"><span>🍜</span><span>🍕</span><span>🥟</span></div>
+        <div class="random-placeholder"><div class="random-center">🍽️</div><strong>Что выпадет сегодня?</strong><span>Нажми на кнопку слева ✨</span></div>
+      </div>
+    </section>
+
+    <section class="container catalog-section" id="catalog" aria-labelledby="catalog-title">
+      <div class="section-intro"><div><div class="section-kicker">✧ СБОРНИК ВКУСНОГО</div><h2 id="catalog-title">Библиотека <em>рецептов</em></h2><p>От «перекусить за 10 минут» до особенного ужина.</p></div><span class="catalog-star" aria-hidden="true">✳</span></div>
+      <div class="catalog-toolbar">
+        <div class="filter-tabs" aria-label="Фильтр сложности"><button data-catalog-difficulty="all" class="filter-pill active" aria-pressed="true">Все рецепты</button><button data-catalog-difficulty="easy" class="filter-pill" aria-pressed="false">🟢 Легко</button><button data-catalog-difficulty="medium" class="filter-pill" aria-pressed="false">🟡 Средне</button><button data-catalog-difficulty="hard" class="filter-pill" aria-pressed="false">🔴 Сложно</button></div>
+        <div class="catalog-selects"><label class="sr-only" for="category-select">Категория</label><select id="category-select"><option value="all">Все блюда</option><option value="hot">Горячее</option><option value="soup">Супы</option><option value="salad">Салаты</option><option value="snack">Перекусы</option><option value="breakfast">Завтраки</option><option value="dessert">Сладкое</option></select><label class="sr-only" for="recipe-search">Поиск рецепта</label><input id="recipe-search" type="search" placeholder="🔍 Найти блюдо..." autocomplete="off"></div>
+      </div>
+      <div class="catalog-meta"><span id="catalog-total"></span><span>Нажми на карточку, чтобы открыть рецепт ↗</span></div>
+      <div class="recipe-grid" id="catalog-grid"></div>
+      <div class="show-more-wrap"><button id="show-more-btn" type="button" class="btn btn-outline" hidden>Показать ещё рецепты ↓</button></div>
+    </section>
+
+    <section class="container personal-section">
+      <div class="personal-card" id="favorites"><div class="personal-card-head"><div><div class="section-kicker">♡ НЕ ПОТЕРЯТЬ</div><h2>Любимые <em>блюда</em></h2></div><span class="icon-squircle">💗</span></div><div id="favorites-content" class="personal-content"></div></div>
+      <div class="personal-card shopping-card" id="shopping"><div class="personal-card-head"><div><div class="section-kicker">🛒 НЕ ЗАБЫТЬ В МАГАЗИНЕ</div><h2>Список <em>покупок</em></h2></div><span class="icon-squircle">🛍️</span></div><div id="shopping-content" class="personal-content"></div><form id="manual-shopping-form" class="manual-shopping-form"><label class="sr-only" for="manual-shopping">Добавить продукт в покупки</label><input id="manual-shopping" placeholder="Добавить продукт..." autocomplete="off"><button type="submit" aria-label="Добавить в покупки">+</button></form><div class="shopping-actions"><button type="button" class="text-btn" id="copy-shopping">↗ Скопировать список</button><button type="button" class="text-btn faint" id="clear-done">Убрать купленное</button></div></div>
+    </section>
+    <section class="container closing-banner"><div><span class="closing-small">МАЛЕНЬКОЕ НАПОМИНАНИЕ ♡</span><h2>Самый вкусный ужин —<br>тот, что приготовлен <em>с любовью.</em></h2><p>Даже если это просто макарошки с сыром.</p></div><span class="closing-emoji" aria-hidden="true">💌</span></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-row"><a class="brand" href="#top"><span class="brand-mark">✳</span><span>ужинчик<span class="brand-dot">.</span></span></a><span>Сделано с ♥ специально для Настик</span><a href="#top">Наверх ↑</a></div></footer>
+
+  <dialog id="recipe-dialog" class="recipe-dialog" aria-labelledby="dialog-title"><div class="dialog-content" id="dialog-content"></div><button id="close-dialog" class="dialog-close" aria-label="Закрыть рецепт" type="button">×</button></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
