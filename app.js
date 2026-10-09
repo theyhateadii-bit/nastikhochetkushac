@@ -158,7 +158,7 @@
         ${matchText ? `<div class="missing-preview ${match.missing.length===0?'available':''}">${escapeHTML(matchText)}</div>` : ''}
         <div class="card-footer"><span>${state.cooked.has(r.id)?'✓ Уже готовила':'🍴 На '+r.serves+' порции'}</span><span class="card-arrow">↗</span></div></div>
       </div>
-      <button class="heart-btn ${fav?'is-favorite':''}" type="button" data-fav="${r.id}" aria-label="${fav?'Убрать из избранного':'Добавить в избранное'}: ${escapeHTML(r.name)}" aria-pressed="${fav}">${fav?'♥':'♡'}</button>
+      <button class="favorite-btn ${fav?'is-favorite':''}" type="button" data-fav="${r.id}" aria-label="${fav?'Убрать из избранного':'Добавить в избранное'}: ${escapeHTML(r.name)}" aria-pressed="${fav}">${fav?'★':'☆'}</button>
     </article>`;
   }
 
@@ -196,7 +196,7 @@
   function renderFavorites(){
     const favorites=recipes.filter(r=>state.favorites.has(r.id));
     $('#favorites-content').innerHTML=favorites.length ? favorites.map(r=>`<div class="small-recipe"><span class="small-recipe-emoji">${r.emoji}</span><span class="small-recipe-details"><strong>${escapeHTML(r.name)}</strong><small>◷ ${r.minutes} мин · ${levels[r.difficulty]}</small></span><button class="small-open" type="button" data-open="${r.id}" aria-label="Открыть ${escapeHTML(r.name)}">↗</button><button class="small-open" type="button" data-fav="${r.id}" aria-label="Убрать из избранного">×</button></div>`).join('')
-      :'<div class="personal-empty"><span>💗</span><strong>Пока ни одного любимчика</strong>Нажми ♡ на понравившемся рецепте — и он появится тут.</div>';
+      :'<div class="personal-empty"><span>⭐</span><strong>Пока нет избранных рецептов</strong>Нажми ☆ на карточке рецепта, чтобы сохранить его сюда.</div>';
   }
   function renderShopping(){
     $('#shopping-content').innerHTML=state.shopping.length ? `<ul class="shopping-list">${state.shopping.map((item,i)=>`<li class="shopping-row ${item.done?'done':''}"><label><input type="checkbox" data-shop-check="${i}" ${item.done?'checked':''}><span class="shopping-text">${escapeHTML(item.name)}</span></label>${item.amount?`<span class="shopping-amount">${escapeHTML(item.amount)}</span>`:''}<button class="remove-shopping" type="button" data-shop-remove="${i}" aria-label="Убрать ${escapeHTML(item.name)}">×</button></li>`).join('')}</ul>`
@@ -215,7 +215,7 @@
       state.shopping.push({name,amount:short(item.amount||'',40),done:false});count++;
     });
     save();renderShopping();
-    toast(count?`🛍️ Добавлено в покупки: ${count}`:'Эти продукты уже есть в списке ♡');
+    toast(count?`🛍️ Добавлено в покупки: ${count}`:'Эти продукты уже есть в списке');
   }
   function openRecipe(id){
     const r=recipes.find(x=>x.id===id);
@@ -243,20 +243,20 @@
        <div class="dialog-steps"><h3>👩‍🍳 Как приготовить</h3><ol>${r.steps.map(step=>`<li>${escapeHTML(step)}</li>`).join('')}</ol></div>
       </div>
       <div class="upgrade-box"><strong>✨ Сделать ещё вкуснее</strong><p>${escapeHTML(r.upgrade)}</p><p class="pair-line"><strong>🍽️ Для полноценного ужина:</strong> ${escapeHTML(r.pair)}</p></div>
-      <div class="dialog-actions"><button class="btn btn-primary" type="button" data-add-missing="${r.id}" ${hasMissing?'':'disabled'}>${hasMissing?`🛍️ Добавить недостающее (${match.missing.length})`:'✓ Всё необходимое есть'}</button><button class="btn btn-outline" type="button" data-modal-fav="${r.id}">${fav?'♥ В избранном':'♡ В избранное'}</button><button class="btn btn-outline" type="button" data-cooked="${r.id}">${cooked?'✓ Приготовлено':'🍳 Я приготовила!'}</button></div>
+      <div class="dialog-actions"><button class="btn btn-primary" type="button" data-add-missing="${r.id}" ${hasMissing?'':'disabled'}>${hasMissing?`🛍️ Добавить недостающее (${match.missing.length})`:'✓ Всё необходимое есть'}</button><button class="btn btn-outline" type="button" data-modal-fav="${r.id}">${fav?'★ В избранном':'☆ В избранное'}</button><button class="btn btn-outline" type="button" data-cooked="${r.id}">${cooked?'✓ Приготовлено':'🍳 Я приготовила!'}</button></div>
       </div>`;
     const dialog=$('#recipe-dialog');
     if(!dialog.open) dialog.showModal();
     $('#close-dialog').focus();
   }
 
-  function toggleFavorite(id){if(state.favorites.has(id))state.favorites.delete(id);else state.favorites.add(id);save();renderFavorites();renderCatalog();renderMatches();if($('#recipe-dialog').open && state.activeRecipeId===id)openRecipe(id);toast(state.favorites.has(id)?'💗 Добавлено в любимые':'Убрано из любимых');}
+  function toggleFavorite(id){if(state.favorites.has(id))state.favorites.delete(id);else state.favorites.add(id);save();renderFavorites();renderCatalog();renderMatches();if($('#recipe-dialog').open && state.activeRecipeId===id)openRecipe(id);toast(state.favorites.has(id)?'★ Добавлено в избранное':'Убрано из избранного');}
   function toggleCooked(id){if(state.cooked.has(id))state.cooked.delete(id);else state.cooked.add(id);save();renderCatalog();renderMatches();if($('#recipe-dialog').open && state.activeRecipeId===id)openRecipe(id);toast(state.cooked.has(id)?'Ура! Ещё один вкусный ужин 🎉':'Отметка снята');}
 
   document.addEventListener('click',(e)=>{
     const btn=e.target.closest('button,[data-open]');
     if(!btn)return;
-    if(btn.dataset.quick){const value=btn.dataset.quick;const items=pantryItems();if(items.includes(canonical(value))){toast('Этот продукт уже указан ♡');return;}state.pantry=state.pantry.trim().replace(/[,;\s]+$/,'')+(state.pantry.trim()?', ':'')+value;$('#pantry-input').value=state.pantry;save();toast(`Добавлено: ${value}`);return;}
+    if(btn.dataset.quick){const value=btn.dataset.quick;const items=pantryItems();if(items.includes(canonical(value))){toast('Этот продукт уже указан');return;}state.pantry=state.pantry.trim().replace(/[,;\s]+$/,'')+(state.pantry.trim()?', ':'')+value;$('#pantry-input').value=state.pantry;save();toast(`Добавлено: ${value}`);return;}
     if(btn.dataset.fav){toggleFavorite(btn.dataset.fav);return;}
     if(btn.dataset.modalFav){toggleFavorite(btn.dataset.modalFav);return;}
     if(btn.dataset.cooked){toggleCooked(btn.dataset.cooked);return;}
@@ -304,10 +304,10 @@
   $('#clear-done').addEventListener('click',()=>{const before=state.shopping.length;state.shopping=state.shopping.filter(x=>!x.done);save();renderShopping();toast(before!==state.shopping.length?'Купленные продукты убраны ✓':'Пока нет отмеченных покупок');});
   $('#copy-shopping').addEventListener('click',async()=>{
     const remaining=state.shopping.filter(x=>!x.done);
-    if(!remaining.length){toast('Список пока пуст ♡');return;}
+    if(!remaining.length){toast('Список пока пуст');return;}
     const text='🛍️ Покупки для ужинчика:\n'+remaining.map(x=>`• ${x.name}${x.amount?' — '+x.amount:''}`).join('\n');
-    try{if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');await navigator.clipboard.writeText(text);toast('Список скопирован! ♡');}
-    catch{const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{const success=document.execCommand('copy');toast(success?'Список скопирован! ♡':'Не получилось скопировать — попробуй позже');}catch{toast('Не получилось скопировать — попробуй позже');}area.remove();}
+    try{if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');await navigator.clipboard.writeText(text);toast('Список скопирован!');}
+    catch{const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{const success=document.execCommand('copy');toast(success?'Список скопирован!':'Не получилось скопировать — попробуй позже');}catch{toast('Не получилось скопировать — попробуй позже');}area.remove();}
   });
   $('#close-dialog').addEventListener('click',()=>$('#recipe-dialog').close());
   $('#recipe-dialog').addEventListener('click',e=>{if(e.target===$('#recipe-dialog'))$('#recipe-dialog').close();});
