@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <nav class="container shortcut-nav" aria-label="Быстрый доступ к разделам"><a href="#pantry">🥕 Из продуктов</a><a href="#battle">⚔️ Битва блюд</a><a href="#budget">🪙 До 300 ₽</a><a href="#desserts">🍰 Десерты</a><a href="#mine">📒 Мои рецепты</a></nav>
+    <nav class="container shortcut-nav" aria-label="Быстрый доступ к разделам"><a href="#pantry">🥕 Из продуктов</a><a href="#battle">⚔️ Битва блюд</a><a href="#desserts">🍰 Десерты</a></nav>
 
     <section class="container main-feature" id="pantry" aria-labelledby="pantry-title">
       <div class="feature-head">
@@ -103,20 +103,6 @@
       <div class="feature-actions"><button id="battle-start" class="btn btn-dark" type="button">⚔️ Начать битву</button><span class="feature-side-note">6 раундов · только блюда для готовки</span></div>
     </section>
 
-    <!-- Оценка себестоимости израсходованных ингредиентов. Цены — редактируемые примерные ориентиры. -->
-    <section class="container feature-section budget-section" id="budget" aria-labelledby="budget-title">
-      <div class="feature-section-head"><div><div class="section-kicker">🪙 ГОТОВИМ В РАМКАХ БЮДЖЕТА</div><h2 id="budget-title">Ужин за <em>300 рублей</em></h2><p>Находим блюда по примерной себестоимости продуктов на порцию. Можно выбрать бюджет и количество порций — или поправить цены продуктов под свой магазин.</p></div><div class="feature-head-art" aria-hidden="true">🥘</div></div>
-      <div class="budget-filters">
-        <div class="budget-control"><span class="input-label">БЮДЖЕТ</span><div class="budget-pills" role="group" aria-label="Максимальный бюджет"><button type="button" class="budget-pill" data-budget-max="200" aria-pressed="false">До 200 ₽</button><button type="button" class="budget-pill active" data-budget-max="300" aria-pressed="true">До 300 ₽</button><button type="button" class="budget-pill" data-budget-max="500" aria-pressed="false">До 500 ₽</button></div></div>
-        <label class="budget-control budget-portion"><span class="input-label">НА СКОЛЬКИХ ГОТОВИМ?</span><select id="budget-servings"><option value="1">1 порция</option><option value="2">2 порции</option><option value="3">3 порции</option><option value="4">4 порции</option></select></label>
-      </div>
-      <div class="budget-list-head"><strong id="budget-summary" aria-live="polite"></strong><span>Приблизительно, в рублях</span></div>
-      <div id="budget-grid" class="budget-grid"></div>
-      <div class="budget-bottom"><button id="budget-more" type="button" class="btn btn-outline" hidden>Показать ещё ↓</button>
-        <details class="price-details"><summary>⚙️ Изменить цены продуктов</summary><p>Укажи свои ориентиры цен в рублях за указанную единицу. Они сохранятся в этом браузере.</p><div id="price-list" class="price-list"></div><button id="price-reset" type="button" class="btn btn-outline">Вернуть примерные цены</button></details></div>
-      <p class="budget-disclaimer">ⓘ Расчёт ориентировочный: стоимость использованного количества ингредиентов, не полных упаковок и не актуальные цены магазинов. Масло для жарки, соль, вода и специи сверх рецепта не включены. Сумма может отличаться от чека.</p>
-    </section>
-
     <section class="container catalog-section" id="catalog" aria-labelledby="catalog-title">
       <div class="section-intro"><div><div class="section-kicker">✧ СБОРНИК ВКУСНОГО</div><h2 id="catalog-title">Библиотека <em>рецептов</em></h2><p>От «перекусить за 10 минут» до особенного ужина.</p></div><span class="catalog-star" aria-hidden="true">✳</span></div>
       <div class="catalog-toolbar">
@@ -136,14 +122,6 @@
       <div id="dessert-grid" class="dessert-grid"></div>
     </section>
 
-    <!-- Личные рецепты хранятся в браузере Настик. Экспорт JSON на случай смены устройства. -->
-    <section class="container feature-section mine-section" id="mine" aria-labelledby="mine-title">
-      <div class="feature-section-head"><div><div class="section-kicker">📒 ТВОЯ ЛИЧНАЯ КНИГА</div><h2 id="mine-title">Мои <em>рецепты</em></h2><p>Добавляй собственные блюда, сохраняй продукты и шаги, прикрепляй YouTube-видео. В любой момент можно исправить рецепт или сохранить резервную копию.</p></div><div class="feature-head-art" aria-hidden="true">📝</div></div>
-      <div class="mine-toolbar"><span id="mine-count" class="feature-count">0 рецептов</span><div class="mine-top-actions"><button id="my-export" type="button" class="btn btn-outline">↓ Сохранить копию</button><label class="btn btn-outline mine-import">↑ Загрузить копию<input id="my-import" type="file" accept=".json,application/json" hidden></label><button id="mine-add" type="button" class="btn btn-primary">＋ Добавить рецепт</button></div></div>
-      <div id="mine-grid" class="mine-grid"></div>
-      <p class="mine-disclaimer">ⓘ Свои рецепты хранятся только в браузере на этом устройстве. Перед очисткой браузера или сменой телефона нажми «Сохранить копию».</p>
-    </section>
-
     <section class="container personal-section">
       <div class="personal-card" id="favorites"><div class="personal-card-head"><div><div class="section-kicker">★ СОХРАНЁННЫЕ РЕЦЕПТЫ</div><h2>Избранные <em>блюда</em></h2></div><span class="icon-squircle">⭐</span></div><div id="favorites-content" class="personal-content"></div></div>
       <div class="personal-card shopping-card" id="shopping"><div class="personal-card-head"><div><div class="section-kicker">🛒 НЕ ЗАБЫТЬ В МАГАЗИНЕ</div><h2>Список <em>покупок</em></h2></div><span class="icon-squircle">🛍️</span></div><div id="shopping-content" class="personal-content"></div><form id="manual-shopping-form" class="manual-shopping-form"><label class="sr-only" for="manual-shopping">Добавить продукт в покупки</label><input id="manual-shopping" placeholder="Добавить продукт..." autocomplete="off"><button type="submit" aria-label="Добавить в покупки">+</button></form><div class="shopping-actions"><button type="button" class="text-btn" id="copy-shopping">↗ Скопировать список</button><button type="button" class="text-btn faint" id="clear-done">Убрать купленное</button></div></div>
@@ -153,25 +131,6 @@
   <footer class="site-footer"><div class="container footer-row"><a class="brand" href="#top"><span class="brand-mark">✳</span><span>ужинчик<span class="brand-dot">.</span></span></a><span>Ужинчик — идеи для ужина каждый день</span><a href="#top">Наверх ↑</a></div></footer>
 
   <dialog id="recipe-dialog" class="recipe-dialog" aria-labelledby="dialog-title"><div class="dialog-content" id="dialog-content"></div><button id="close-dialog" class="dialog-close" aria-label="Закрыть рецепт" type="button">×</button></dialog>
-
-  <dialog id="my-form-dialog" class="recipe-dialog custom-dialog" aria-labelledby="my-form-title">
-    <button class="dialog-close" data-close-dialog type="button" aria-label="Закрыть">×</button>
-    <div class="custom-dialog-inner">
-      <div class="section-kicker">📝 МОЯ КУЛИНАРНАЯ КНИГА</div><h2 id="my-form-title">Новый рецепт</h2>
-      <form id="my-form" class="my-form">
-        <div class="my-form-row"><label>Название блюда *<input name="name" maxlength="90" required placeholder="Например, паста с грибами"></label><label>Эмодзи <select name="emoji"><option value="🍽️">🍽️ Тарелка</option><option value="🍝">🍝 Паста</option><option value="🍲">🍲 Суп</option><option value="🍳">🍳 Яйца</option><option value="🥗">🥗 Салат</option><option value="🍰">🍰 Десерт</option><option value="🥞">🥞 Блины</option><option value="🍪">🍪 Печенье</option><option value="🥟">🥟 Манты</option><option value="🍗">🍗 Курица</option><option value="🥘">🥘 Горячее</option></select></label></div>
-        <label>Короткое описание<textarea name="description" rows="2" maxlength="280" placeholder="Чем нравится это блюдо..."></textarea></label>
-        <div class="my-form-row my-form-three"><label>Время, минут *<input name="minutes" type="number" min="1" max="480" required value="30"></label><label>Порций *<input name="serves" type="number" min="1" max="16" required value="2"></label><label>Примерная цена всего рецепта, ₽<input name="estimatedCost" type="number" min="0" max="100000" placeholder="Необязательно"></label></div>
-        <div class="my-form-row"><label>Сложность<select name="difficulty"><option value="easy">Легко</option><option value="medium">Средне</option><option value="hard">Сложно</option></select></label><label>Категория<select name="category"><option value="hot">Горячее</option><option value="soup">Суп</option><option value="salad">Салат</option><option value="snack">Перекус</option><option value="breakfast">Завтрак</option><option value="dessert">Десерт</option></select></label></div>
-        <label>Ингредиенты * <small>Каждый ингредиент на новой строке; количество через |</small><textarea name="ingredients" rows="5" required placeholder="макароны | 200 г&#10;сыр | 120 г&#10;?помидор | 1 шт (необязательно)"></textarea></label>
-        <label>Шаги приготовления * <small>Каждый шаг с новой строки</small><textarea name="steps" rows="6" required placeholder="Отвари макароны.&#10;Натри сыр.&#10;Смешай всё на сковороде."></textarea></label>
-        <label>YouTube-видео <small>Необязательно; вставь ссылку на конкретный ролик</small><input type="url" name="videoUrl" placeholder="https://www.youtube.com/watch?v=..."></label>
-        <p id="my-form-error" class="my-form-error" role="alert"></p>
-        <div class="feature-actions"><button type="submit" class="btn btn-primary">Сохранить рецепт ✓</button><button type="button" data-close-dialog class="btn btn-outline">Отмена</button></div>
-      </form>
-    </div>
-  </dialog>
-  <dialog id="my-view-dialog" class="recipe-dialog custom-dialog" aria-labelledby="my-view-title"><button class="dialog-close" data-close-dialog type="button" aria-label="Закрыть">×</button><div id="my-view-content"></div></dialog>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
