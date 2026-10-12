@@ -10,8 +10,10 @@
   <title>Ужинчик — для Настик</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="order.css">
   <script src="recipes.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="order.js" defer></script>
 </head>
 <body>
   <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -25,6 +27,7 @@
       <nav class="nav-links" aria-label="Разделы сайта">
         <a href="#pantry">Из продуктов</a>
         <a href="#roulette">Рулетка</a>
+        <a href="#order">Заказать</a>
         <a href="#catalog">Рецепты</a>
       </nav>
       <a class="header-saved" href="#shopping" aria-label="Перейти к списку покупок">🛍️ <span class="header-saved-label">Покупки</span> <span id="bag-count" class="count-bubble">0</span></a>
@@ -40,6 +43,7 @@
         <div class="hero-actions">
           <a class="btn btn-primary" href="#pantry">Найти мне ужин <span aria-hidden="true">↗</span></a>
           <a class="btn btn-soft" href="#roulette">🎲 Удиви меня</a>
+          <a class="btn btn-soft" href="#order">🛵 Без готовки</a>
         </div>
         <div class="hero-mini"><span class="avatar-stack">🍅 🥑 🍋</span><span><strong id="recipe-count">57</strong> вкусных идей — от «лень готовить» до «я шеф»</span></div>
       </div>
@@ -85,6 +89,41 @@
         <div class="random-orbit" aria-hidden="true"><span>🍜</span><span>🍕</span><span>🥟</span></div>
         <div class="random-placeholder"><div class="random-center">🍽️</div><strong>Что выпадет сегодня?</strong><span>Нажми на кнопку слева ✨</span></div>
       </div>
+    </section>
+
+
+    <!-- Отдельная рулетка готовой еды: работает без сервера, заказ оформляется в сервисе доставки. -->
+    <section class="container order-section" id="order" aria-labelledby="order-title">
+      <div class="order-main">
+        <div class="order-intro">
+          <div class="section-kicker"><span aria-hidden="true">🛵</span> КОГДА ГОТОВИТЬ НЕ ХОЧЕТСЯ</div>
+          <h2 id="order-title">Я вообще не знаю,<br><em>чего хочу!</em></h2>
+          <p>Не думай о том, что заказать. Нажми на кнопку — и Ужинчик сам выберет что-нибудь вкусное. Если не понравится, попробуем ещё.</p>
+          <div class="order-benefits" aria-label="Как работает рулетка">
+            <span><span aria-hidden="true">🎲</span> Случайный выбор</span>
+            <span><span aria-hidden="true">📍</span> Новосибирск</span>
+            <span><span aria-hidden="true">🧠</span> Учитываем предпочтения</span>
+          </div>
+          <button id="order-spin" type="button" class="btn btn-dark order-spin"><span aria-hidden="true">🎲</span> Реши за меня! <span aria-hidden="true">→</span></button>
+          <p class="order-privacy">Предпочтения хранятся только в этом браузере. Регистрация не нужна.</p>
+        </div>
+        <div class="order-showcase">
+          <div class="order-showcase-top"><span><span class="order-live-dot"></span> ВЫБОР УЖИНЧИКА</span><span class="order-day">Сегодня без готовки</span></div>
+          <div class="order-result" id="order-result" aria-live="polite" aria-atomic="true">
+            <div class="order-idle">
+              <div class="order-icon order-icon-idle" aria-hidden="true">🥡</div>
+              <div class="order-result-tag">НЕ МОЖЕШЬ ОПРЕДЕЛИТЬСЯ?</div>
+              <h3>Давай решим за тебя!</h3>
+              <p>Пицца, роллы, бургеры или десерт? Сегодня можно просто заказать.</p>
+            </div>
+          </div>
+          <div class="order-bottom">
+            <div id="order-memory" class="order-memory" aria-live="polite">Нажми «Реши за меня!», чтобы начать.</div>
+            <button id="order-reset" class="order-reset" type="button" hidden>Вернуть отклонённые варианты ↺</button>
+          </div>
+        </div>
+      </div>
+      <div class="order-disclaimer"><span aria-hidden="true">ⓘ</span> Ужинчик помогает с выбором, но не оформляет заказ: актуальные товары, цены и доставку по адресу нужно проверить в Яндекс Еде или Самокате.</div>
     </section>
 
     <section class="container catalog-section" id="catalog" aria-labelledby="catalog-title">
