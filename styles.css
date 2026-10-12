@@ -19,3 +19,19 @@
 /* Декоративные круги не должны создавать горизонтальную прокрутку на телефонах. */
 html{overflow-x:clip}
 .ambient-two{right:0;opacity:.16}
+
+/* Мемная кнопка-пасхалка в рулетке ужинов. */
+.beer-break-btn{margin-top:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;width:min(100%,390px);min-height:70px;padding:12px 20px;border:2px solid #b77c30;border-radius:16px;background:linear-gradient(125deg,#fff2c2,#ffe0a2);color:#563716;box-shadow:0 7px 0 rgba(156,106,40,.13),0 12px 25px rgba(156,106,40,.12);transform:rotate(-1deg);transition:transform .18s,box-shadow .18s,filter .18s}
+.beer-break-btn:hover{transform:rotate(0deg) translateY(-3px);filter:saturate(1.09);box-shadow:0 9px 0 rgba(156,106,40,.13),0 16px 28px rgba(156,106,40,.18)}
+.beer-break-btn:active{transform:translateY(1px) rotate(0deg);box-shadow:0 3px 0 rgba(156,106,40,.13)}
+.beer-break-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.beer-break-pre{font-size:11px;font-weight:750;line-height:1.4}
+.beer-break-main{font-size:16px;font-weight:900;line-height:1.3;letter-spacing:.01em}
+.beer-result{border:2px solid #e6c186;background:linear-gradient(155deg,#fffcf4 0%,#fff1d3 100%)}
+.beer-result .roll-kicker{color:#98621e}
+.beer-result h3{font-size:20px;line-height:1.22}
+.beer-result p{font-size:12px;line-height:1.6}
+.beer-result .btn{background:#7b4a1a;white-space:normal}
+.beer-result .btn:hover{background:#603a16}
+@media(max-width:750px){.beer-break-btn{align-self:stretch;width:100%}}
+@media(max-width:390px){.beer-break-main{font-size:14px}.beer-break-pre{font-size:10px}}

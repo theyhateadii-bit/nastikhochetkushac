@@ -292,13 +292,22 @@
     const out=$('#random-output');out.classList.toggle('spinning',spinning);
     out.innerHTML=`<div class="random-orbit" aria-hidden="true"><span>🍜</span><span>🍕</span><span>🥟</span></div><div class="roulette-result"><span class="roll-kicker">${spinning?'ИЩЕМ ЧТО-ТО ВКУСНОЕ…':'✨ СЕГОДНЯ ГОТОВИМ'}</span><span class="roll-emoji" aria-hidden="true">${r.emoji}</span><h3>${escapeHTML(r.name)}</h3><p>${r.minutes} мин · ${levels[r.difficulty]}</p><button type="button" class="btn btn-primary" ${spinning?'disabled':''} data-open="${r.id}">Посмотреть рецепт ↗</button></div>`;
   }
+  // Шуточная пасхалка внутри обычной рулетки. Кнопка не предлагает заказать или купить напитки.
+  $('#beer-break-btn').addEventListener('click',()=>{
+    if(state.spinning)return;
+    const out=$('#random-output');
+    out.classList.remove('spinning');
+    out.innerHTML=`<div class="random-orbit" aria-hidden="true"><span>🍻</span><span>🥨</span><span>🍺</span></div><div class="roulette-result beer-result"><span class="roll-kicker">ПЛАН НА ВЕЧЕР ИЗМЕНИЛСЯ</span><span class="roll-emoji" aria-hidden="true">🍺</span><h3>ДАВАЙ ЕБАНЁМ ПИВА!</h3><p>В пизду всё, заебал Максим. Сегодня рулетка объявляет выходной от готовки.</p><button type="button" class="btn btn-primary" id="beer-back-to-food">Ладно, давай всё-таки поедим ↻</button></div>`;
+    const back=out.querySelector('#beer-back-to-food');
+    back.addEventListener('click',()=>$('#spin-btn').click());
+  });
   $('#spin-btn').addEventListener('click',()=>{
     if(state.spinning)return;
     const pool=recipes.filter(r=>state.rouletteDifficulty==='all'||r.difficulty===state.rouletteDifficulty);
     if(!pool.length)return;
-    state.spinning=true;$('#spin-btn').disabled=true;
+    state.spinning=true;$('#spin-btn').disabled=true;$('#beer-break-btn').disabled=true;
     let ticks=0;
-    const interval=setInterval(()=>{renderRandom(pool[Math.floor(Math.random()*pool.length)],true);ticks++;if(ticks>=11){clearInterval(interval);const r=chooseRandom(pool);state.lastRandomId=r.id;state.spinning=false;$('#spin-btn').disabled=false;$('#spin-btn').innerHTML='Ещё раз! <span aria-hidden="true">↻</span>';renderRandom(r);}},75);
+    const interval=setInterval(()=>{renderRandom(pool[Math.floor(Math.random()*pool.length)],true);ticks++;if(ticks>=11){clearInterval(interval);const r=chooseRandom(pool);state.lastRandomId=r.id;state.spinning=false;$('#spin-btn').disabled=false;$('#beer-break-btn').disabled=false;$('#spin-btn').innerHTML='Ещё раз! <span aria-hidden="true">↻</span>';renderRandom(r);}},75);
   });
   $('#manual-shopping-form').addEventListener('submit',e=>{e.preventDefault();const input=$('#manual-shopping');if(!input.value.trim())return;addShopping([{name:input.value.trim(),amount:''}]);input.value='';});
   $('#clear-done').addEventListener('click',()=>{const before=state.shopping.length;state.shopping=state.shopping.filter(x=>!x.done);save();renderShopping();toast(before!==state.shopping.length?'Купленные продукты убраны ✓':'Пока нет отмеченных покупок');});
