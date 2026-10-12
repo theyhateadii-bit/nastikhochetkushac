@@ -10,10 +10,8 @@
   <title>Ужинчик — для Настик</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="planner.css">
   <script src="recipes.js" defer></script>
   <script src="app.js" defer></script>
-  <script src="planner.js" defer></script>
 </head>
 <body>
   <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -27,8 +25,6 @@
       <nav class="nav-links" aria-label="Разделы сайта">
         <a href="#pantry">Из продуктов</a>
         <a href="#roulette">Рулетка</a>
-        <a href="#smart-picks">Подбор</a>
-        <a href="#week-menu">Меню на неделю</a>
         <a href="#catalog">Рецепты</a>
       </nav>
       <a class="header-saved" href="#shopping" aria-label="Перейти к списку покупок">🛍️ <span class="header-saved-label">Покупки</span> <span id="bag-count" class="count-bubble">0</span></a>
@@ -44,7 +40,6 @@
         <div class="hero-actions">
           <a class="btn btn-primary" href="#pantry">Найти мне ужин <span aria-hidden="true">↗</span></a>
           <a class="btn btn-soft" href="#roulette">🎲 Удиви меня</a>
-          <a class="btn btn-soft" href="#smart-picks">🍳 Что приготовить?</a>
         </div>
         <div class="hero-mini"><span class="avatar-stack">🍅 🥑 🍋</span><span><strong id="recipe-count">57</strong> вкусных идей — от «лень готовить» до «я шеф»</span></div>
       </div>
@@ -90,45 +85,6 @@
         <div class="random-orbit" aria-hidden="true"><span>🍜</span><span>🍕</span><span>🥟</span></div>
         <div class="random-placeholder"><div class="random-center">🍽️</div><strong>Что выпадет сегодня?</strong><span>Нажми на кнопку слева ✨</span></div>
       </div>
-    </section>
-
-
-    <section class="container smart-section" id="smart-picks" aria-labelledby="smart-picks-title">
-      <div class="section-intro smart-intro"><div><div class="section-kicker">✦ КОГДА НЕ ХОЧЕТСЯ ДУМАТЬ</div><h2 id="smart-picks-title">Выбрать ужин <em>проще простого</em></h2><p>Два быстрых способа определиться, что сегодня приготовить.</p></div><span class="catalog-star" aria-hidden="true">✳</span></div>
-      <div class="smart-grid">
-        <article class="smart-panel lazy-panel">
-          <div class="smart-panel-icon" aria-hidden="true">🛋️</div>
-          <div class="section-kicker">РЕЖИМ ЭНЕРГОСБЕРЕЖЕНИЯ</div>
-          <h3>Мне лень <em>готовить</em></h3>
-          <p>Только простые рецепты до 15 минут. Никаких сложных манипуляций.</p>
-          <label class="smart-check"><input type="checkbox" id="lazy-pantry-only"><span>Только из продуктов, которые есть дома</span></label>
-          <button type="button" id="lazy-pick" class="btn btn-dark">Подкинь быстрый ужин <span aria-hidden="true">↻</span></button>
-          <div id="lazy-result" class="smart-result" aria-live="polite"><div class="smart-empty">Нажми на кнопку — найдём что-нибудь быстрое.</div></div>
-        </article>
-        <article class="smart-panel mood-panel">
-          <div class="smart-panel-icon" aria-hidden="true">🧠</div>
-          <div class="section-kicker">МИНИ-ТЕСТ НА АППЕТИТ</div>
-          <h3>Что я сегодня <em>хочу?</em></h3>
-          <p>Выбери настроение и сколько времени готова потратить.</p>
-          <div class="mood-controls">
-            <label for="mood-type">ХОЧЕТСЯ</label>
-            <select id="mood-type"><option value="any">Всего понемногу</option><option value="hearty">Сытного и горячего</option><option value="light">Лёгкого и свежего</option><option value="soup">Супа</option><option value="veggie">Без мяса и рыбы</option><option value="comfort">Уютного, с сыром или картошкой</option></select>
-            <label for="mood-time">ЕСТЬ ВРЕМЯ</label>
-            <select id="mood-time"><option value="any">Неважно</option><option value="15">До 15 минут</option><option value="30">До 30 минут</option><option value="60">До 60 минут</option></select>
-          </div>
-          <button type="button" id="mood-pick" class="btn btn-primary">Предложить 3 блюда <span aria-hidden="true">→</span></button>
-          <div id="mood-result" class="smart-result" aria-live="polite"><div class="smart-empty">Расскажи, чего хочется, и получишь три варианта.</div></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="container week-section" id="week-menu" aria-labelledby="week-menu-title">
-      <div class="week-top">
-        <div><div class="section-kicker">📅 БОЛЬШЕ НИКАКИХ «А ЧТО НА УЖИН?»</div><h2 id="week-menu-title">Меню <em>на неделю</em></h2><p>Семь разных ужинов. Можно поменять один день или собрать новый план целиком.</p></div>
-        <div class="week-controls"><button type="button" id="week-generate" class="btn btn-dark">🎲 Составить меню</button><button type="button" id="week-shopping" class="btn btn-outline" disabled>🛍️ Докупить продукты</button></div>
-      </div>
-      <div id="week-grid" class="week-grid" aria-live="polite"><div class="week-placeholder">Нажми «Составить меню», чтобы получить 7 идей для ужина.</div></div>
-      <p id="week-notice" class="week-notice">Меню сохраняется на этом устройстве. В покупки попадут недостающие основные ингредиенты без суммирования количества.</p>
     </section>
 
     <section class="container catalog-section" id="catalog" aria-labelledby="catalog-title">

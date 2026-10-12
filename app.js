@@ -242,8 +242,6 @@
        </div>
        <div class="dialog-steps"><h3>👩‍🍳 Как приготовить</h3><ol>${r.steps.map(step=>`<li>${escapeHTML(step)}</li>`).join('')}</ol></div>
       </div>
-      <div class="video-search-box"><div><strong>▶ Видео приготовления</strong><p>${/^[a-zA-Z0-9_-]{11}$/.test(r.videoId||'')?'Русскоязычный видеорецепт. Сверяй ингредиенты с текстовой инструкцией.':'Перейди к поиску русскоязычных роликов на YouTube. Встроенное видео для этого рецепта пока не подобрано.'}</p></div><a class="btn btn-outline" href="https://www.youtube.com/results?search_query=${encodeURIComponent(r.name+' рецепт как приготовить на русском')}" target="_blank" rel="noopener noreferrer">Видео на YouTube ↗</a></div>
-      ${/^[a-zA-Z0-9_-]{11}$/.test(r.videoId||'')?`<div class="recipe-video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${r.videoId}" title="Видео приготовления: ${escapeHTML(r.name)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`:''}
       <div class="upgrade-box"><strong>✨ Сделать ещё вкуснее</strong><p>${escapeHTML(r.upgrade)}</p><p class="pair-line"><strong>🍽️ Для полноценного ужина:</strong> ${escapeHTML(r.pair)}</p></div>
       <div class="dialog-actions"><button class="btn btn-primary" type="button" data-add-missing="${r.id}" ${hasMissing?'':'disabled'}>${hasMissing?`🛍️ Добавить недостающее (${match.missing.length})`:'✓ Всё необходимое есть'}</button><button class="btn btn-outline" type="button" data-modal-fav="${r.id}">${fav?'★ В избранном':'☆ В избранное'}</button><button class="btn btn-outline" type="button" data-cooked="${r.id}">${cooked?'✓ Приготовлено':'🍳 Я приготовила!'}</button></div>
       </div>`;
@@ -316,8 +314,6 @@
   $('#recipe-dialog').addEventListener('close',()=>{state.activeRecipeId=null;});
 
   renderAll();
-  // API для дополнительных модулей. Всё работает локально, без сервера.
-  window.DINNER_APP = {openRecipe,addShopping,getMatch,pantryItems};
   // Не используется в интерфейсе; простые функции для автоматической проверки сайта.
   window.DINNER_TEST = {canonical,parsePantry,getMatch,recipesCount:recipes.length};
 })();
